@@ -29,4 +29,14 @@ namespace Code.Components
     {
         public float Value;
     }
+
+    public struct Rotate : IComponentData
+    {
+        
+    }
+
+    public struct JumpData : IComponentData
+    {
+        
+    }
 }

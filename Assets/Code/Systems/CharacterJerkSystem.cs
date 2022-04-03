@@ -1,4 +1,5 @@
 using Code.Components;
+using Code.Components.Character;
 using Code.Components.Interfaces;
 using Unity.Entities;
 using UnityEngine;

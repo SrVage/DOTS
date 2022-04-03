@@ -1,17 +1,21 @@
 using Code.Components.Interfaces;
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 
-namespace Code.Components
+namespace Code.Components.Character
 {
     public class UserInputData:MonoBehaviour, IConvertGameObjectToEntity
     {
         public MonoBehaviour ShootAbility => _shootAbility;
         public MonoBehaviour JerkAbility => _jerkAbility;
-        [SerializeField] private float _speed;
-        [SerializeField] private MonoBehaviour _shootAbility;
-        [SerializeField] private MonoBehaviour _jerkAbility;
+
+        [SerializeField] private float  _speed,
+                                        _health;
+
+        [SerializeField] private MonoBehaviour _shootAbility,
+                                                _jerkAbility,
+                                                _takeDamage,
+                                                _changeBullet;
         public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
         {
             dstManager.AddComponentData(entity, new InputData());
@@ -19,6 +23,16 @@ namespace Code.Components
             {
                 Speed = _speed/100
             });
+
+            if (_health > 0)
+            {
+                dstManager.AddComponentData(entity, new HealthData()
+                {
+                    Health = _health,
+                    MaxHealth = _health
+                });
+            }
+            
             if (_shootAbility != null && _shootAbility is IAbility ability)
             {
                 dstManager.AddComponentData(entity, new ShootData());
@@ -28,27 +42,11 @@ namespace Code.Components
             {
                 dstManager.AddComponentData(entity, new JerkData());
             }
+
+            if (_takeDamage != null && _takeDamage is ITakeDamage takeDamage)
+            {
+                takeDamage.Init(entity);
+            }
         }
-    }
-
-    public struct InputData:IComponentData
-    {
-        public float2 MoveDirection;
-        public float Shoot;
-        public float Jerk;
-    }
-
-    public struct MoveData : IComponentData
-    {
-        public float Speed;
-    }
-
-    public struct ShootData : IComponentData
-    {
-    }
-
-    public struct JerkData : IComponentData
-    {
-        
     }
 }

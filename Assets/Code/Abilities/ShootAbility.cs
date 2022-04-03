@@ -1,4 +1,3 @@
-using Code.Components;
 using Code.Components.Interfaces;
 using UnityEngine;
 
@@ -6,7 +5,9 @@ namespace Code.Abilities
 {
     public class ShootAbility:MonoBehaviour, IAbility
     {
+        public bool JumpBullet = false;
         [SerializeField] private GameObject _bulletPrefab;
+        [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _shootDelay;
         private float _lastShootTime = 0;
         public void Execute()
@@ -20,7 +21,11 @@ namespace Code.Abilities
                 return;
             }
             var playerTransform = transform;
-            Instantiate(_bulletPrefab, playerTransform.position+Vector3.up, playerTransform.rotation);
+            var bulletGO = Instantiate(_bulletPrefab, _shootPoint.position, playerTransform.rotation);
+            if (bulletGO.TryGetComponent<BulletAbility>(out var bullet))
+            {
+                bullet.IsJump = JumpBullet;
+            }
         }
     }
 }
