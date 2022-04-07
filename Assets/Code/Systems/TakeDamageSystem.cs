@@ -1,5 +1,7 @@
 using Code.Components.Character;
+using Code.Tools;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Code.Systems
 {
@@ -22,6 +24,8 @@ namespace Code.Systems
                 ref var health = ref healthData.Health;
                 health -= damage.Value;
                 _entityManager.RemoveComponent<Damage>(entity);
+                //GoogleDriveTool.Upload(JsonUtility.ToJson(health), "health", () => {Debug.Log(GoogleDriveTool.FileList());});
+                FireBaseUtils.SaveData(health.ToString(), "health");
             });
         }
     }
