@@ -3,7 +3,7 @@ using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Code
+namespace Code.Utils
 {
     public static class Utils
     {

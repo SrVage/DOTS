@@ -2,6 +2,7 @@ using Code.Components;
 using Code.Components.Character;
 using Unity.Entities;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,9 +14,13 @@ namespace Code.Systems
         private InputAction _moveAction;
         private InputAction _shootAction;
         private InputAction _jerkAction;
+        private InputAction _saveAction;
+        private InputAction _loadAction;
         private float2 _moveDirection;
         private float _shootInput;
         private float _jerkInput;
+        private float _saveInput;
+        private float _loadInput;
         protected override void OnCreate()
         {
             _inputQuery = GetEntityQuery(ComponentType.ReadOnly<InputData>());
@@ -45,6 +50,18 @@ namespace Code.Systems
             _jerkAction.started += context => { _jerkInput = context.ReadValue<float>(); };
             _jerkAction.canceled += context => { _jerkInput = context.ReadValue<float>(); };
             _jerkAction.Enable();
+
+            _saveAction = new InputAction("save", binding: "<Keyboard>/Q");
+            _saveAction.performed += context => { _saveInput = context.ReadValue<float>(); };
+            _saveAction.started += context => { _saveInput = context.ReadValue<float>(); };
+            _saveAction.canceled += context => { _saveInput = context.ReadValue<float>(); };
+            _saveAction.Enable();
+            
+            _loadAction = new InputAction("load", binding: "<Keyboard>/L");
+            _loadAction.performed += context => { _loadInput = context.ReadValue<float>(); };
+            _loadAction.started += context => { _loadInput = context.ReadValue<float>(); };
+            _loadAction.canceled += context => { _loadInput = context.ReadValue<float>(); };
+            _loadAction.Enable();
         }
 
         protected override void OnStopRunning()
@@ -61,6 +78,8 @@ namespace Code.Systems
                 inputData.MoveDirection = _moveDirection;
                 inputData.Shoot = _shootInput;
                 inputData.Jerk = _jerkInput;
+                inputData.Save = _saveInput;
+                inputData.Load = _loadInput;
             });
         }
     }

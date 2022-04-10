@@ -8,5 +8,7 @@ namespace Code.Components.Character
         public float2 MoveDirection;
         public float Shoot;
         public float Jerk;
+        public float Save;
+        public float Load;
     }
 }
