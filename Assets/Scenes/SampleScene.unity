@@ -840,6 +840,105 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666496688}
   m_CullTransparentMesh: 1
+--- !u!1 &1680890047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1680890049}
+  - component: {fileID: 1680890048}
+  - component: {fileID: 1680890050}
+  - component: {fileID: 1680890051}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1680890048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680890047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1680890050}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &1680890049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680890047}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1680890050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680890047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e615a3be020ea4525a5dfd8202bef988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cfg: {fileID: 11400000, guid: 60b30ada7591542afadcbfc1ca32ba28, type: 2}
+  _gameConfig: {fileID: 1680890051}
+  _fromCfg: 1
+--- !u!114 &1680890051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680890047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618b501621184d5480aeee7314abea25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  playerSpeed: 10
+  shootDelay: 2
+  jerkDistance: 4
+  jerkSpeed: 30
+  jerkRechargeTime: 5
 --- !u!1 &1703907539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,6 +1534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 0}
   _damage: 1
+  _attackDistance: 5
 --- !u!1001 &6770536708796737592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1956,11 +2056,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7691409351593854857, guid: c5d089ccc35f74fb0a7c94a991d4c8ef, type: 3}
       propertyPath: _speed
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7691409351593854857, guid: c5d089ccc35f74fb0a7c94a991d4c8ef, type: 3}
       propertyPath: _health
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7691409351593854857, guid: c5d089ccc35f74fb0a7c94a991d4c8ef, type: 3}
       propertyPath: _takeDamage

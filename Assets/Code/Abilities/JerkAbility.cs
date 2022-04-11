@@ -1,6 +1,7 @@
 using System.Collections;
 using Code.Components.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Abilities
 {
@@ -12,6 +13,15 @@ namespace Code.Abilities
         [SerializeField] private float _rechargeTime;
         private Vector3 _endPoint;
         private float _time;
+        [Inject]
+        public void Init([Inject(Id = "jerkDistance")] float distance,
+            [Inject(Id = "jerkSpeed")] float speed, 
+            [Inject(Id = "jerkRechargeTime")] float time)
+        {
+            _distance = distance;
+            _speed = speed;
+            _rechargeTime = time;
+        }
         public void Execute()
         {
             if (_time > Time.time)

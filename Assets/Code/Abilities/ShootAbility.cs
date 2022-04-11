@@ -1,5 +1,6 @@
 using Code.Components.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Abilities
 {
@@ -10,6 +11,12 @@ namespace Code.Abilities
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _shootDelay;
         private float _lastShootTime = 0;
+
+        [Inject]
+        public void Init([Inject(Id = "shootDelay")] float delay)
+        {
+            _shootDelay = delay;
+        }
         public void Execute()
         {
             if (Time.time<=_lastShootTime+_shootDelay)

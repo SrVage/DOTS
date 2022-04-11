@@ -1,6 +1,7 @@
 using Code.Components.Interfaces;
 using Unity.Entities;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Components.Character
 {
@@ -16,6 +17,13 @@ namespace Code.Components.Character
                                                 _jerkAbility,
                                                 _takeDamage,
                                                 _changeBullet;
+
+        [Inject]
+        public void Init([Inject(Id = "health")] float health, [Inject(Id = "speed")] float speed)
+        {
+            _health = health;
+            _speed = speed;
+        }
         public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
         {
             dstManager.AddComponentData(entity, new InputData());
