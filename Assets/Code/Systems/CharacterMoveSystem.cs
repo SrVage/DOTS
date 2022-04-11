@@ -1,8 +1,6 @@
-using Code.Components;
 using Code.Components.Character;
 using Unity.Entities;
 using UnityEngine;
-using UnityEngine.SearchService;
 
 namespace Code.Systems
 {
@@ -27,7 +25,7 @@ namespace Code.Systems
                     return;
                 ref var playerTransform = ref transform;
                 ref var speed = ref moveData.Speed;
-                playerTransform.position += direction*speed;
+                playerTransform.position += direction*speed*Time.DeltaTime;
                 playerTransform.rotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
             });
         }
