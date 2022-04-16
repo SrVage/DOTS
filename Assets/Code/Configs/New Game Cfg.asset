@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: New Game Cfg
   m_EditorClassIdentifier: 
   playerHealth: 120
-  playerSpeed: 40
-  shootDelay: 5
+  playerSpeed: 100
+  shootDelay: 0.1
   jerkDistance: 5
   jerkSpeed: 50
   jerkRechargeTime: 3

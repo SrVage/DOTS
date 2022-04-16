@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Behaviours;
 using Code.Components;
 using Code.Components.Interfaces;
 using UnityEngine;
@@ -12,6 +13,13 @@ namespace Code.Abilities
         private CollisionAbility _collisionAbility;
         public void Execute()
         {
+            foreach (var collision in _collisions)
+            {
+                if (collision.TryGetComponent<FreezeBehaviour>(out var freeze))
+                {
+                    freeze.IsFreeze = true;
+                }
+            }
             if (IsJump)
                 _collisionAbility.EntityManager.AddComponentData(_collisionAbility.Entity, new Rotate());
             else 

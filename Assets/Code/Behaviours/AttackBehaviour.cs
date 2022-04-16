@@ -21,7 +21,7 @@ namespace Code.Behaviours
         public override float Evaluate()
         {
             var distance = (_character.position - transform.position).sqrMagnitude;
-            return distance<_attackDistance?0:float.MaxValue;
+            return distance<_attackDistance?1:float.MaxValue;
         }
 
         public override void Behave()
