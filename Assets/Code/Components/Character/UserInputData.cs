@@ -9,7 +9,6 @@ namespace Code.Components.Character
     {
         public MonoBehaviour ShootAbility => _shootAbility;
         public MonoBehaviour JerkAbility => _jerkAbility;
-
         [SerializeField] private float  _speed,
                                         _health;
 
@@ -17,6 +16,8 @@ namespace Code.Components.Character
                                                 _jerkAbility,
                                                 _takeDamage,
                                                 _changeBullet;
+
+        public Animator Animator;
 
         [Inject]
         public void Init([Inject(Id = "health")] float health, [Inject(Id = "speed")] float speed)
@@ -49,6 +50,15 @@ namespace Code.Components.Character
             if (_jerkAbility != null && _jerkAbility is IAbility jerkAbility)
             {
                 dstManager.AddComponentData(entity, new JerkData());
+            }
+
+            if (Animator != null)
+            {
+                dstManager.AddComponentData(entity, new AnimationData()
+                {
+                    MoveHash = Animator.StringToHash("Speed"),
+                    AttackHash = UnityEngine.Animator.StringToHash("Attack")
+                });
             }
 
             if (_takeDamage != null && _takeDamage is ITakeDamage takeDamage)

@@ -10,6 +10,9 @@ namespace Code.Abilities
         protected List<Collider> _collisions => _collisionAbility.Colliders;
         private CollisionAbility _collisionAbility;
 
+        public void ChangeDamage(float damage) => 
+            _damage = damage;
+
         public virtual void Execute()
         {
             foreach (var collision in _collisions)
