@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Code.Components.Character;
 using Unity.Entities;
 using UnityEngine;

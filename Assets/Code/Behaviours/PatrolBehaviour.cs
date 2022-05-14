@@ -11,7 +11,7 @@ namespace Code.Behaviours
 
         public override void Behave()
         {
-            Debug.Log("Patrol");
+            //Debug.Log("Patrol");
         }
     }
 }

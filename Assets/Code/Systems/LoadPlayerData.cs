@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Code.Components.Character;
 using Code.Utils;
 using Unity.Entities;
@@ -13,6 +14,29 @@ namespace Code.Systems
         {
             _playerDataQuery = GetEntityQuery(ComponentType.ReadOnly<InputData>()
                 ,ComponentType.ReadOnly<HealthData>());
+        }
+
+        protected override async void OnStartRunning()
+        {
+            Debug.Log("StartLoading");
+            await LoadData();
+            Debug.Log("LoadComplete");
+        }
+
+        async Task LoadData()
+        {
+            Entities.With(_playerDataQuery).ForEach(
+                (Transform transform, ref InputData inputData, ref HealthData healthData) =>
+                {
+                    var playerData = SavedData.Load();
+                    if (playerData != null)
+                    {
+                        transform.position = playerData.Position;
+                        ref var hp = ref healthData.Health;
+                        hp = playerData.Health;
+                    }
+                });
+            await Task.Delay(3000);
         }
 
         protected override void OnUpdate()
