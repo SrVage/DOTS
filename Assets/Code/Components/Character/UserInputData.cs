@@ -1,4 +1,8 @@
+using System.IO;
+using System.Threading.Tasks;
 using Code.Components.Interfaces;
+using Code.Configs;
+using Code.Utils;
 using Unity.Entities;
 using UnityEngine;
 using Zenject;
@@ -9,6 +13,7 @@ namespace Code.Components.Character
     {
         public MonoBehaviour ShootAbility => _shootAbility;
         public MonoBehaviour JerkAbility => _jerkAbility;
+        private GameConfig _gameConfig;
         [SerializeField] private float  _speed,
                                         _health;
 
@@ -19,26 +24,35 @@ namespace Code.Components.Character
 
         public Animator Animator;
 
-        [Inject]
+        /*[Inject]
         public void Init([Inject(Id = "health")] float health, [Inject(Id = "speed")] float speed)
         {
             _health = health;
             _speed = speed;
-        }
-        public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+        }*/
+
+        private async Task<GameConfig> LoadConfig()
         {
+            var stringData = File.ReadAllText(Application.dataPath + "/PlayerConfig.txt");
+            return JsonUtility.FromJson<GameConfig>(stringData);
+        }
+        public async void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+        {
+            var task  = LoadConfig();
+            await task;
+            _gameConfig = task.Result;
             dstManager.AddComponentData(entity, new InputData());
             dstManager.AddComponentData(entity, new MoveData()
             {
-                Speed = _speed/100
+                Speed = _gameConfig.playerSpeed/100
             });
 
             if (_health > 0)
             {
                 dstManager.AddComponentData(entity, new HealthData()
                 {
-                    Health = _health,
-                    MaxHealth = _health
+                    Health = _gameConfig.playerHealth,
+                    MaxHealth = _gameConfig.playerHealth
                 });
             }
             

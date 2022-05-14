@@ -1,4 +1,7 @@
+using System.IO;
+using System.Threading.Tasks;
 using Code.Components.Interfaces;
+using Code.Configs;
 using UnityEngine;
 using Zenject;
 
@@ -10,12 +13,20 @@ namespace Code.Abilities
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _shootDelay;
+        private GameConfig _gameConfig;
         private float _lastShootTime = 0;
 
-        [Inject]
-        public void Init([Inject(Id = "shootDelay")] float delay)
+        //[Inject]
+        public async void Awake()
         {
-            _shootDelay = delay;
+            await LoadConfig();
+            _shootDelay = _gameConfig.shootDelay;
+        }
+        
+        private async Task LoadConfig()
+        {
+            var stringData = File.ReadAllText(Application.dataPath + "/PlayerConfig.txt");
+            _gameConfig = JsonUtility.FromJson<GameConfig>(stringData);
         }
         public void Execute()
         {

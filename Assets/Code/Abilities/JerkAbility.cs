@@ -1,5 +1,8 @@
 using System.Collections;
+using System.IO;
+using System.Threading.Tasks;
 using Code.Components.Interfaces;
+using Code.Configs;
 using UnityEngine;
 using Zenject;
 
@@ -13,14 +16,20 @@ namespace Code.Abilities
         [SerializeField] private float _rechargeTime;
         private Vector3 _endPoint;
         private float _time;
-        [Inject]
-        public void Init([Inject(Id = "jerkDistance")] float distance,
-            [Inject(Id = "jerkSpeed")] float speed, 
-            [Inject(Id = "jerkRechargeTime")] float time)
+        private GameConfig _gameConfig;
+        
+        public async void Awake()
         {
-            _distance = distance;
-            _speed = speed;
-            _rechargeTime = time;
+            await LoadConfig();
+            _distance = _gameConfig.jerkDistance;
+            _speed = _gameConfig.jerkSpeed;
+            _rechargeTime = _gameConfig.jerkRechargeTime;
+        }
+        
+        private async Task LoadConfig()
+        {
+            var stringData = File.ReadAllText(Application.dataPath + "/PlayerConfig.txt");
+            _gameConfig = JsonUtility.FromJson<GameConfig>(stringData);
         }
         public void Execute()
         {

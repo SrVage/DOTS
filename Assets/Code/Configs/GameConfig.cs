@@ -1,8 +1,11 @@
+using System;
+using System.IO;
 using UnityEngine;
 
 namespace Code.Configs
 {
-    public class GameConfig:MonoBehaviour, IGameCfg
+    [Serializable]
+    public class GameConfig: IGameCfg
     {
         [Header("General")]
         public float playerHealth = 100;
@@ -22,5 +25,12 @@ namespace Code.Configs
         public float JerkDistance => jerkDistance;
         public float JerkSpeed => jerkSpeed;
         public float JerkRechargeTime => jerkRechargeTime;
+
+        /*private void Awake()
+        {
+            Debug.Log("save");
+            string stringData = JsonUtility.ToJson(this);
+            File.WriteAllText(Application.dataPath+"/PlayerConfig.txt", stringData);
+        }*/
     }
 }

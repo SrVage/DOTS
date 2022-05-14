@@ -2107,7 +2107,6 @@ GameObject:
   - component: {fileID: 1680890049}
   - component: {fileID: 1680890048}
   - component: {fileID: 1680890050}
-  - component: {fileID: 1680890051}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -2128,8 +2127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 1680890050}
+  _monoInstallers: []
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -2169,32 +2167,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680890047}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e615a3be020ea4525a5dfd8202bef988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cfg: {fileID: 11400000, guid: 60b30ada7591542afadcbfc1ca32ba28, type: 2}
-  _gameConfig: {fileID: 1680890051}
+  _gameConfig:
+    playerHealth: 100
+    playerSpeed: 10
+    shootDelay: 2
+    jerkDistance: 4
+    jerkSpeed: 30
+    jerkRechargeTime: 5
   _fromCfg: 1
---- !u!114 &1680890051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680890047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 618b501621184d5480aeee7314abea25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: 100
-  playerSpeed: 20
-  shootDelay: 2
-  jerkDistance: 4
-  jerkSpeed: 30
-  jerkRechargeTime: 5
 --- !u!1 &1701341841
 GameObject:
   m_ObjectHideFlags: 0
