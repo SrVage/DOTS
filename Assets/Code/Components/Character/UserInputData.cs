@@ -24,35 +24,35 @@ namespace Code.Components.Character
 
         public Animator Animator;
 
-        /*[Inject]
+        [Inject]
         public void Init([Inject(Id = "health")] float health, [Inject(Id = "speed")] float speed)
         {
             _health = health;
             _speed = speed;
-        }*/
+        }
 
         private async Task<GameConfig> LoadConfig()
         {
             var stringData = File.ReadAllText(Application.dataPath + "/PlayerConfig.txt");
             return JsonUtility.FromJson<GameConfig>(stringData);
         }
-        public async void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+        public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
         {
-            var task  = LoadConfig();
-            await task;
-            _gameConfig = task.Result;
+            //var task  = LoadConfig();
+            //await task;
+            //_gameConfig = task.Result;
             dstManager.AddComponentData(entity, new InputData());
             dstManager.AddComponentData(entity, new MoveData()
             {
-                Speed = _gameConfig.playerSpeed/100
+                Speed = _speed
             });
 
             if (_health > 0)
             {
                 dstManager.AddComponentData(entity, new HealthData()
                 {
-                    Health = _gameConfig.playerHealth,
-                    MaxHealth = _gameConfig.playerHealth
+                    Health = _health,
+                    MaxHealth = _health
                 });
             }
             
