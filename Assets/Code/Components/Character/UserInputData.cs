@@ -49,6 +49,7 @@ namespace Code.Components.Character
 
             if (_health > 0)
             {
+                Debug.Log(_health);
                 dstManager.AddComponentData(entity, new HealthData()
                 {
                     Health = _health,

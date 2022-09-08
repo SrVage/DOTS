@@ -85,6 +85,7 @@ namespace Code.Abilities
 
         private void OnDestroy()
         {
+            Debug.Log(gameObject.name);
             EntityManager.DestroyEntity(Entity);
         }
     }

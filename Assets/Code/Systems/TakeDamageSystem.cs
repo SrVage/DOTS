@@ -1,5 +1,6 @@
 using Code.Components.Character;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Code.Systems
 {
@@ -20,6 +21,7 @@ namespace Code.Systems
             Entities.With(_damageQuery).ForEach((Entity entity, ref HealthData healthData, ref Damage damage) =>
             {
                 ref var health = ref healthData.Health;
+                Debug.Log(health);
                 health -= damage.Value;
                 _entityManager.RemoveComponent<Damage>(entity);
             });
