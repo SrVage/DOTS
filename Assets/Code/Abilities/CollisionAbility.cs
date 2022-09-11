@@ -83,11 +83,8 @@ namespace Code.Abilities
             _collider.enabled = false;
         }
 
-        private void OnDestroy()
-        {
-            Debug.Log(gameObject.name);
+        private void OnDestroy() => 
             EntityManager.DestroyEntity(Entity);
-        }
     }
 
     public struct ActorColliderData : IComponentData

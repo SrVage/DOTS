@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Code.Components.Interfaces;
-using Unity.Entities;
 using UnityEngine;
 
 namespace Code.Abilities
