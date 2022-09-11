@@ -4,6 +4,7 @@ using Code.Components.Interfaces;
 using Code.Configs;
 using Code.Utils;
 using Unity.Entities;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -20,7 +21,8 @@ namespace Code.Components.Character
         [SerializeField] private MonoBehaviour _shootAbility,
                                                 _jerkAbility,
                                                 _takeDamage,
-                                                _changeBullet;
+                                                _changeBullet,
+                                                _characterData;
 
         public Animator Animator;
 
@@ -79,6 +81,11 @@ namespace Code.Components.Character
             if (_takeDamage != null && _takeDamage is ITakeDamage takeDamage)
             {
                 takeDamage.Init(entity);
+            }
+
+            if (_characterData != null && _characterData is CharacterData characterData)
+            {
+                characterData.Init(entity);
             }
         }
     }

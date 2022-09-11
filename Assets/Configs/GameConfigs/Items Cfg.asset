@@ -21,3 +21,7 @@ MonoBehaviour:
     _sprite: {fileID: 21300000, guid: eda53870e81d6465c85d75f8f734a440, type: 3}
   - _name: Blood
     _sprite: {fileID: 21300000, guid: 3482cb60a9dc4426493504661b9dacd9, type: 3}
+  ArmourItems:
+  - _name: Armour
+    _sprite: {fileID: 21300000, guid: 8adb1d4dee3be4c69810ff5679cceaae, type: 3}
+    _armour: 20

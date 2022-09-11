@@ -9,6 +9,7 @@ namespace Code.Items
     public class DropItemAbility:MonoBehaviour, ICollisionAbility, IConvertGameObjectToEntity
     {
         [SerializeField] protected string _name;
+        
         public string Name => _name;
         protected List<Collider> _collisions => _collisionAbility.Colliders;
         

@@ -1,7 +1,5 @@
 using Code.Components.Character;
-using Code.UI;
 using Unity.Entities;
-using UnityEngine;
 
 namespace Code.Systems
 {
@@ -9,13 +7,19 @@ namespace Code.Systems
     {
         private EntityQuery _damageQuery;
         private EntityManager _entityManager;
-        private ViewModel _viewModel;
         
         protected override void OnCreate()
         {
-            _viewModel = Object.FindObjectOfType<ViewModel>();
-            _damageQuery = GetEntityQuery(ComponentType.ReadOnly<Damage>(),
-                ComponentType.ReadOnly<HealthData>());
+            var query = new EntityQueryDesc
+            {
+                None = new ComponentType[] {ComponentType.ReadOnly<ShieldComponent>()},
+                All = new ComponentType[]
+                {
+                    ComponentType.ReadOnly<Damage>(),
+                    ComponentType.ReadOnly<HealthData>()
+                }
+            };
+            _damageQuery = GetEntityQuery(query);
             _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
         }
 

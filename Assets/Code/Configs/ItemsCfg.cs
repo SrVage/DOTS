@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Code.Components.Interfaces;
+using Code.UI;
 using UnityEngine;
 
 namespace Code.Configs
@@ -11,12 +12,14 @@ namespace Code.Configs
         public List<IItem> Items;
         public List<HealthItem> HealthItems;
         public List<PartsOfItem> PartsOfItems;
+        public List<ArmourItem> ArmourItems;
 
         public void Init()
         {
             Items = new List<IItem>();
             Items.AddRange(HealthItems);
             Items.AddRange(PartsOfItems);
+            Items.AddRange(ArmourItems);
         }
 
         [Serializable]
@@ -37,9 +40,16 @@ namespace Code.Configs
         }
         
         [Serializable]
+        public class ArmourItem:Item
+        {
+            public float _armour;
+            public float Armour => _armour;
+        }
+        
+        [Serializable]
         public class PartsOfItem : Item, ICraftable
         {
-            public GameObject CurrentGameObject { get; set; }
+            public ItemUIView CurrentItem { get; set; }
         }
     }
 }

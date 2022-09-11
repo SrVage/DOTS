@@ -1,3 +1,4 @@
+using Code.UI;
 using UnityEngine;
 
 namespace Code.Components.Interfaces
@@ -5,6 +6,6 @@ namespace Code.Components.Interfaces
     public interface ICraftable
     {
         public string Name { get; }
-        public GameObject CurrentGameObject { get; set; }
+        public ItemUIView CurrentItem { get; set; }
     }
 }

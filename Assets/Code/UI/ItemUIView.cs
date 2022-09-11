@@ -1,7 +1,6 @@
 using Code.Components.Interfaces;
 using Code.Configs;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 namespace Code.UI
@@ -10,7 +9,7 @@ namespace Code.UI
     {
         [SerializeField] private Image _image;
         [SerializeField] private Button _useButton;
-        private IItem _item;
+        public IItem Item;
         private Inventory _inventory;
         public bool CraftMode = false;
         private bool _isSelect = false;
@@ -18,29 +17,35 @@ namespace Code.UI
         public void SetNewItemParameters(IItem item, CharacterData characterData, Inventory inventory)
         {
             _image.sprite = item.Sprite;
-            _item = item;
-            _item.Owner = characterData;
+            Item = item;
+            Item.Owner = characterData;
             _inventory = inventory;
             _useButton.onClick.AddListener(ClickButton);
             
+        }
+
+        public void Destroy()
+        {
+            _inventory.DestroyItem(this);
+            Destroy(gameObject);
         }
 
         private void ClickButton()
         {
             if (CraftMode)
             {
-                if (_item is ICraftable parts)
+                if (Item is ICraftable parts)
                 {
                     if (_isSelect)
                     {
-                        _inventory.CheckCraft(parts, false);
+                        _inventory.CheckCraft(parts.Name, false);
                         _image.color = Color.white;
                         _isSelect = false;
                     }
                     else
                     {
-                        parts.CurrentGameObject = gameObject;
-                        _inventory.CheckCraft(parts, true);
+                        parts.CurrentItem = this;
+                        _inventory.CheckCraft(parts.Name, true);
                         _image.color = Color.red;
                         _isSelect = true;
                     }
@@ -48,7 +53,7 @@ namespace Code.UI
             }
             else
             {
-                if (_item is ItemsCfg.HealthItem restore)
+                if (Item is ItemsCfg.HealthItem restore)
                 {
                     if (restore.Owner.TryGetComponent<ITakeDamage>(out var takeDamage))
                     {
@@ -56,6 +61,13 @@ namespace Code.UI
                         Destroy(gameObject);
                         _inventory.DestroyItem(this);
                     }
+                }
+                if (Item is ItemsCfg.ArmourItem armour)
+                {
+                   
+                    armour.Owner.SetShield(armour.Armour);
+                    Destroy(gameObject);
+                    _inventory.DestroyItem(this);
                 }
             }
         }

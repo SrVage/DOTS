@@ -34,7 +34,7 @@ namespace Code.UI
             _craftController = new CraftController(_craftsCfg, this);
         }
 
-        public void CheckCraft(ICraftable craftItem, bool add)
+        public void CheckCraft(string craftItem, bool add)
         {
             if (add)
                 _craftController.AddItem(craftItem);
@@ -95,6 +95,11 @@ namespace Code.UI
         {
             if (_listOfInventoryItems.Contains(item))
                 _listOfInventoryItems.Remove(item);
+        }
+        public void DestroyItem(string item)
+        {
+            if (_listOfInventoryItems.FirstOrDefault(i => i.Item.Name == item) != null)
+                _listOfInventoryItems.First(i => i.Item.Name == item).Destroy();
         }
     }
 }

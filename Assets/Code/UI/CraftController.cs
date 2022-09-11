@@ -1,31 +1,37 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Components.Interfaces;
 using Code.Configs;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Code.UI
 {
     public class CraftController
     {
-        private readonly List<ICraftable> _craftableItems;
+        private readonly List<string> _craftableItems;
         private readonly CraftsCfg _craftsCfg;
         private readonly Inventory _inventory;
 
         public CraftController(CraftsCfg craftsCfg, Inventory inventory)
         {
-            _craftableItems = new List<ICraftable>();
+            _craftableItems = new List<string>();
             _craftsCfg = craftsCfg;
+            foreach (var receipt in _craftsCfg.Receipts)
+            {
+                Array.Sort(receipt.ItemsNames, StringComparer.InvariantCulture);
+            }
             _inventory = inventory;
         }
 
-        public void AddItem(ICraftable craftItem)
+        public void AddItem(string craftItem)
         {
             _craftableItems.Add(craftItem);
             Check();
         }
 
-        public void DeleteItem(ICraftable craftItem)
+        public void DeleteItem(string craftItem)
         {
             if (_craftableItems.Contains(craftItem))
                 _craftableItems.Remove(craftItem);
@@ -35,28 +41,22 @@ namespace Code.UI
         {
             if (_craftableItems.Count<2)
                 return;
+            var craftablesNames = _craftableItems.ToArray();
+            Array.Sort(craftablesNames, StringComparer.InvariantCulture);
             foreach (var receipt in _craftsCfg.Receipts)
             {
-                if (receipt.ItemsNames.Length != _craftableItems.Count)
-                    continue;
-                var count = _craftableItems.Count;
-                foreach (var item in _craftableItems)
-                {
-                    if (receipt.ItemsNames.Contains(item.Name))
-                        count--;
-                }
-                if (count == 0)
-                {
+                if (receipt.ItemsNames.SequenceEqual(craftablesNames)) 
                     Finish(receipt.NewItem);
-                    break;
-                }
             }
         }
 
         private void Finish(string newItem)
         {
-            foreach (var item in _craftableItems) 
-                GameObject.Destroy(item.CurrentGameObject);
+            foreach (var t in _craftableItems)
+            {
+                _inventory.DestroyItem(t);
+            }
+            _craftableItems.Clear();
             _inventory.CreateNewItem(newItem);
         }
     }
