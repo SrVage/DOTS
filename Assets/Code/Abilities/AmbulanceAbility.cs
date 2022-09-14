@@ -1,4 +1,5 @@
 using Code.Components.Interfaces;
+using Photon.Pun;
 
 namespace Code.Abilities
 {
@@ -11,7 +12,7 @@ namespace Code.Abilities
                 if (collision.TryGetComponent<ITakeDamage>(out var damage))
                 {
                     damage.Damage(-_damage);
-                    Destroy(gameObject);
+                    PhotonNetwork.Destroy(gameObject);
                 }
             }
         }

@@ -21,7 +21,7 @@ namespace Code.UI
         private List<ItemUIView> _listOfInventoryItems= new List<ItemUIView>();
         private TextMeshProUGUI _craftButtonText;
         private CraftController _craftController;
-        private CharacterData _characterData;
+        [SerializeField] private CharacterData _characterData;
         private bool _isCraft = false;
 
         private void Awake()

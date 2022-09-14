@@ -25,6 +25,7 @@ namespace Code.Systems
 
         async Task LoadData()
         {
+            return;
             Entities.With(_playerDataQuery).ForEach(
                 (Transform transform, ref InputData inputData, ref HealthData healthData) =>
                 {

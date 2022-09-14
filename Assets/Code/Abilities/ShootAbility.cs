@@ -2,6 +2,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Code.Components.Interfaces;
 using Code.Configs;
+using Code.Network;
+using Photon.Pun;
 using UnityEngine;
 using Zenject;
 
@@ -39,7 +41,7 @@ namespace Code.Abilities
                 return;
             }
             var playerTransform = transform;
-            var bulletGO = Instantiate(_bulletPrefab, _shootPoint.position, playerTransform.rotation);
+            var bulletGO = PhotonNetwork.Instantiate(_bulletPrefab.name, _shootPoint.position, playerTransform.rotation);
             if (bulletGO.TryGetComponent<BulletAbility>(out var bullet))
             {
                 bullet.IsJump = JumpBullet;

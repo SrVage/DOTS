@@ -14,8 +14,9 @@ namespace Code.Systems
         {
             _jerkQuery = GetEntityQuery(ComponentType.ReadOnly<InputData>(), 
                 ComponentType.ReadOnly<JerkData>(),
-                ComponentType.ReadOnly<UserInputData>()
-                );
+                ComponentType.ReadOnly<UserInputData>(),
+                ComponentType.ReadOnly<LocalPlayerTag>()
+            );
         }
 
         protected override void OnUpdate()

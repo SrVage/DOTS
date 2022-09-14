@@ -8,6 +8,7 @@ namespace Code.UI
     public class ViewModel:MonoBehaviour, INotifyPropertyChanged
     {
         private string _health;
+        private string _enemyHealth;
         private string _time;
         public event PropertyChangedEventHandler PropertyChanged;
         [Binding]
@@ -18,6 +19,16 @@ namespace Code.UI
             {
                 _health = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Health)));
+            }
+        }
+        [Binding]
+        public string EnemyHealth
+        {
+            get => _enemyHealth;
+            set
+            {
+                _enemyHealth = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EnemyHealth)));
             }
         }
         

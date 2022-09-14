@@ -8,19 +8,20 @@ namespace Code
 {
     public class CharacterData:MonoBehaviour
     {
-        private Inventory _inventory;
+        [SerializeField] private Inventory _inventory;
         private Entity _entity;
         private EntityManager _entityManager;
 
         public void Init(Entity entity)
         {
             _entity = entity;
-            _inventory = FindObjectOfType<Inventory>();
             _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
         }
         
         public void GetItem(string name)
         {
+            if (_inventory==null)
+                _inventory = FindObjectOfType<Inventory>(); 
             _inventory.CreateNewItem(name, this);
         }
 

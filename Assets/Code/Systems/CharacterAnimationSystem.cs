@@ -1,4 +1,5 @@
 using Code.Components.Character;
+using Code.Network;
 using Unity.Entities;
 using UnityEngine;
 
@@ -16,7 +17,8 @@ namespace Code.Systems
         {
             _animationQuerry = GetEntityQuery(ComponentType.ReadOnly<UserInputData>(),
                 ComponentType.ReadOnly<AnimationData>(),
-                ComponentType.ReadOnly<InputData>());
+                ComponentType.ReadOnly<InputData>(),
+                ComponentType.ReadOnly<LocalPlayerTag>());
         }
         protected override void OnUpdate()
         {
@@ -36,8 +38,11 @@ namespace Code.Systems
                 _lastPosition = userInputData.transform.position;
                     userInputData.Animator.SetFloat(animatorData.MoveHash,smoothSpeed);
                     userInputData.Animator.speed = smoothSpeed<0.5f?1:smoothSpeed*2;
-                if (inputData.Shoot>0)
-                    userInputData.Animator.SetTrigger(animatorData.AttackHash);
+                    if (inputData.Shoot > 0)
+                    {
+                        userInputData.Animator.SetTrigger(animatorData.AttackHash);
+                        userInputData.SynchronizedParameters.Attack();
+                    }
             });
         }
     }

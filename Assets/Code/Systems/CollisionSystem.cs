@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Code.Abilities;
+using Code.Components.Character;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;

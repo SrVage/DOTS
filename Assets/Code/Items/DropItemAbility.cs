@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Code.Abilities;
 using Code.Components.Interfaces;
+using Photon.Pun;
 using Unity.Entities;
 using UnityEngine;
 
@@ -23,9 +24,12 @@ namespace Code.Items
             {
                 if (collision.TryGetComponent<CharacterData>(out var character))
                 {
+                    Debug.Log(character);
+                    Debug.Log(character+" "+true);
                     character.GetItem(Name);
                     _dstManager.DestroyEntity(_entity);
-                    Destroy(gameObject);
+                    if(GetComponent<PhotonView>().IsMine && PhotonNetwork.IsConnected)
+                        PhotonNetwork.Destroy(gameObject);
                 }
             }
         }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Components.Interfaces;
+using Photon.Pun;
 using Unity.Entities;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace Code.Abilities
                 if (collision.TryGetComponent<IChangeBullet>(out var change))
                 {
                    change.GetBullet();
-                   Destroy(gameObject);
+                   PhotonNetwork.Destroy(gameObject);
                 }
             }    
         }

@@ -11,8 +11,9 @@ namespace Code.Systems
         {
             _shootQuery = GetEntityQuery(ComponentType.ReadOnly<InputData>(), 
                 ComponentType.ReadOnly<ShootData>(),
-                ComponentType.ReadOnly<UserInputData>()
-                );
+                ComponentType.ReadOnly<UserInputData>(),
+                ComponentType.ReadOnly<LocalPlayerTag>()
+            );
         }
 
         protected override void OnUpdate()

@@ -14,7 +14,8 @@ namespace Code.Systems
         protected override void OnCreate()
         {
             _viewModel = Object.FindObjectOfType<ViewModel>();
-            _timerQuery = GetEntityQuery(ComponentType.ReadOnly<ShieldComponent>());
+            _timerQuery = GetEntityQuery(ComponentType.ReadOnly<ShieldComponent>(),                
+                ComponentType.ReadOnly<LocalPlayerTag>());
             _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
         }
 

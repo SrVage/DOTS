@@ -11,7 +11,8 @@ namespace Code.Systems
         {
             _moveQuery = GetEntityQuery(ComponentType.ReadOnly<InputData>(), 
                 ComponentType.ReadOnly<MoveData>(),
-                ComponentType.ReadOnly<Transform>()
+                ComponentType.ReadOnly<Transform>(),
+                ComponentType.ReadOnly<LocalPlayerTag>()
                 );
         }
 

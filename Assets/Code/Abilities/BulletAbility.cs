@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.Behaviours;
 using Code.Components;
 using Code.Components.Interfaces;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Code.Abilities
@@ -23,7 +24,7 @@ namespace Code.Abilities
             if (IsJump)
                 _collisionAbility.EntityManager.AddComponentData(_collisionAbility.Entity, new Rotate());
             else 
-                GameObject.Destroy(gameObject);
+                PhotonNetwork.Destroy(gameObject);
         }
 
         public void Init(CollisionAbility parent)

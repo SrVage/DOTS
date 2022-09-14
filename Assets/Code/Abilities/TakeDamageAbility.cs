@@ -1,5 +1,6 @@
 using Code.Components.Character;
 using Code.Components.Interfaces;
+using Code.Network;
 using Unity.Entities;
 using UnityEngine;
 
@@ -11,11 +12,19 @@ namespace Code.Abilities
         private Entity _entity;
         private EntityManager _entityManager;
         private float _time;
+        private bool _isLocal;
+        private SynchronizedParameters _synchronizedParameters;
 
         public void Init(Entity entity)
         {
             _entity = entity;
             _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        }
+
+        public void NetworkInit(bool isLocal, SynchronizedParameters synchronizedParameters)
+        {
+            _isLocal = isLocal;
+            _synchronizedParameters = synchronizedParameters;
         }
         
         public void Damage(float damage)
@@ -36,6 +45,8 @@ namespace Code.Abilities
             {
                 Value = damage
             });
+            if (_isLocal)
+                _synchronizedParameters.SetDamage(damage);
         }
     }
 }

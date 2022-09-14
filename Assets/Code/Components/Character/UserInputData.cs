@@ -2,7 +2,9 @@ using System.IO;
 using System.Threading.Tasks;
 using Code.Components.Interfaces;
 using Code.Configs;
+using Code.Network;
 using Code.Utils;
+using Photon.Pun;
 using Unity.Entities;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,9 +23,9 @@ namespace Code.Components.Character
         [SerializeField] private MonoBehaviour _shootAbility,
                                                 _jerkAbility,
                                                 _takeDamage,
-                                                _changeBullet,
-                                                _characterData;
+                                                _changeBullet;
 
+        public SynchronizedParameters SynchronizedParameters;
         public Animator Animator;
 
         [Inject]
@@ -43,6 +45,8 @@ namespace Code.Components.Character
             //var task  = LoadConfig();
             //await task;
             //_gameConfig = task.Result;
+            if (PhotonView.Get(gameObject).IsMine) 
+                dstManager.AddComponentData(entity, new LocalPlayerTag());
             dstManager.AddComponentData(entity, new InputData());
             dstManager.AddComponentData(entity, new MoveData()
             {
@@ -54,7 +58,7 @@ namespace Code.Components.Character
                 Debug.Log(_health);
                 dstManager.AddComponentData(entity, new HealthData()
                 {
-                    Health = _health,
+                    Health = _health-20,
                     MaxHealth = _health
                 });
             }
@@ -81,11 +85,15 @@ namespace Code.Components.Character
             if (_takeDamage != null && _takeDamage is ITakeDamage takeDamage)
             {
                 takeDamage.Init(entity);
+                if (SynchronizedParameters!=null)
+                    takeDamage.NetworkInit(PhotonView.Get(gameObject).IsMine, SynchronizedParameters);
             }
 
-            if (_characterData != null && _characterData is CharacterData characterData)
+            if (PhotonView.Get(gameObject).IsMine)
             {
-                characterData.Init(entity);
+                var characterData = gameObject.AddComponent<CharacterData>();
+                    characterData.Init(entity);
+                
             }
         }
     }
