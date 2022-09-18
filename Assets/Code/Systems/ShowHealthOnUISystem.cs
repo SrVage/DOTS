@@ -16,6 +16,7 @@ namespace Code.Systems
         private ViewModel _viewModelNetwork;
         private float _previousHealth=0;
         private float _previousNetworkHealth=0;
+        private Camera _camera;
         
         protected override void OnCreate()
         {
@@ -25,6 +26,7 @@ namespace Code.Systems
             _healthQueryNetwork = GetEntityQuery(ComponentType.ReadOnly<HealthData>(),
                 ComponentType.Exclude<LocalPlayerTag>(),
                 ComponentType.ReadOnly<Transform>());
+            _camera = Camera.main;
         }
 
         protected override void OnUpdate()
@@ -42,7 +44,7 @@ namespace Code.Systems
             {
                 if (_viewModelNetwork != null)
                 {
-                    _viewModelNetwork.transform.LookAt(Camera.main.transform);
+                    _viewModelNetwork.transform.LookAt(_camera.transform);
                 }
                 ref var health = ref healthData.Health;
                 ref var maxHealth = ref healthData.MaxHealth;

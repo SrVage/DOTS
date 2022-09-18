@@ -1,4 +1,6 @@
+using Code.Abilities;
 using Code.Components;
+using Code.Components.Character;
 using Unity.Entities;
 using UnityEngine;
 
@@ -14,19 +16,19 @@ namespace Code.Systems
         {
             _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             _timerQuerry = GetEntityQuery(ComponentType.ReadOnly<Transform>(),
-                ComponentType.ReadOnly<BulletTimer>());
+                ComponentType.ReadOnly<BulletTimer>(), ComponentType.Exclude<InPool>());
         }
 
         protected override void OnUpdate()
         {
-            Entities.With(_timerQuerry).ForEach((Entity entity, Transform transform, ref BulletTimer timer) =>
+            Entities.With(_timerQuerry).ForEach((Entity entity, ref BulletTimer timer, BulletAbility bulletAbility) =>
             {
                 ref var time = ref timer.Value;
                 time -= Time.DeltaTime;
                 if (time <= 0)
                 {
-                    _entityManager.DestroyEntity(entity);
-                    Object.Destroy(transform.gameObject);
+                    //_entityManager.DestroyEntity(entity);
+                    bulletAbility.ReturnToPool();
                 }
             });
         }

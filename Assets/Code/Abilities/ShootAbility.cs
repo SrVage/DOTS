@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Code.Components.Interfaces;
 using Code.Configs;
 using Code.Network;
+using Code.Utils;
 using Photon.Pun;
 using UnityEngine;
 using Zenject;
@@ -15,6 +16,7 @@ namespace Code.Abilities
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _shootDelay;
+        private IPool<GameObject> _pool;
         private GameConfig _gameConfig;
         private float _lastShootTime = 0;
 
@@ -23,6 +25,7 @@ namespace Code.Abilities
         {
             await LoadConfig();
             _shootDelay = _gameConfig.shootDelay;
+            _pool = new BulletPool(_bulletPrefab);
         }
         
         private async Task LoadConfig()
@@ -41,10 +44,14 @@ namespace Code.Abilities
                 return;
             }
             var playerTransform = transform;
-            var bulletGO = PhotonNetwork.Instantiate(_bulletPrefab.name, _shootPoint.position, playerTransform.rotation);
+            var bulletGO = _pool.GetObject();
+            bulletGO.transform.position = _shootPoint.position;
+            bulletGO.transform.rotation = playerTransform.rotation;
             if (bulletGO.TryGetComponent<BulletAbility>(out var bullet))
             {
+                bullet.DestroyPoolTag();
                 bullet.IsJump = JumpBullet;
+                bullet.BulletPool = _pool;
             }
         }
     }
