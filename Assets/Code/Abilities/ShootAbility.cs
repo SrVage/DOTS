@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Code.Components.Interfaces;
@@ -16,6 +17,8 @@ namespace Code.Abilities
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _shootDelay;
+        [SerializeField] private MonoBehaviour[] _abilities;
+        private List<IAbility> _soundAbility = new List<IAbility>();
         private IPool<GameObject> _pool;
         private GameConfig _gameConfig;
         private float _lastShootTime = 0;
@@ -26,6 +29,13 @@ namespace Code.Abilities
             await LoadConfig();
             _shootDelay = _gameConfig.shootDelay;
             _pool = new BulletPool(_bulletPrefab);
+            foreach (var ability in _abilities)
+            {
+                if (ability is ISoundAbility soundAbility)
+                {
+                    _soundAbility.Add(soundAbility);
+                }
+            }
         }
         
         private async Task LoadConfig()
@@ -43,6 +53,9 @@ namespace Code.Abilities
                 Debug.Log("Shoot without prefab");
                 return;
             }
+
+            foreach (var sounds in _soundAbility) 
+                sounds.Execute();
             var playerTransform = transform;
             var bulletGO = _pool.GetObject();
             bulletGO.transform.position = _shootPoint.position;

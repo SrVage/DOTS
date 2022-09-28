@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7925131225661937339}
   - component: {fileID: 8917797883007085546}
   - component: {fileID: 4017452890839005477}
+  - component: {fileID: -7937829395010754602}
   m_Layer: 0
   m_Name: blood
   m_TagString: Untagged
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 7925131225661937318}
   _useAbilities:
+  - {fileID: -7937829395010754602}
   - {fileID: 7925131225661937339}
   Colliders: []
 --- !u!114 &7925131225661937339
@@ -183,3 +185,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-7937829395010754602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7925131225661937338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1aecc69c594e458cab4e5da6d27db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clip: {fileID: 8300000, guid: 17dccfdc4b8d64e58ad0a5a696ce2a11, type: 3}

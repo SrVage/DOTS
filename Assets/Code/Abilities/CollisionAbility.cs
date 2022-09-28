@@ -12,7 +12,7 @@ namespace Code.Abilities
     {
         [SerializeField] private Collider _collider;
         [SerializeField] private MonoBehaviour[] _useAbilities;
-        private List<ICollisionAbility> _abilities = new List<ICollisionAbility>();
+        private List<IAbility> _abilities = new List<IAbility>();
         public List<Collider> Colliders = new List<Collider>();
         public Entity Entity;
         public EntityManager EntityManager;
@@ -25,6 +25,11 @@ namespace Code.Abilities
                 {
                     _abilities.Add(ability);
                     ability.Init(this);
+                }
+
+                if (useAbility is ISoundAbility soundAbility)
+                {
+                    _abilities.Add(soundAbility);
                 }
             }
         }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 190960157998540076}
   - component: {fileID: 8162031140127851048}
   - component: {fileID: -3157735196561690221}
+  - component: {fileID: 939325461665088190}
   m_Layer: 0
   m_Name: bottle
   m_TagString: Untagged
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 190960157998540083}
   _useAbilities:
+  - {fileID: 939325461665088190}
   - {fileID: 190960157998540076}
   Colliders: []
 --- !u!114 &190960157998540076
@@ -183,3 +185,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &939325461665088190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190960157998540079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1aecc69c594e458cab4e5da6d27db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clip: {fileID: 8300000, guid: 176f25885be5c4aa0ba7634e5e8e4493, type: 3}

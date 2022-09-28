@@ -4037,6 +4037,8 @@ GameObject:
   - component: {fileID: 3186208756428323914}
   - component: {fileID: 7128014951056439804}
   - component: {fileID: 8409481860483307925}
+  - component: {fileID: 5531269809792561902}
+  - component: {fileID: -6587426219406173903}
   m_Layer: 6
   m_Name: Barbarian
   m_TagString: Untagged
@@ -4133,6 +4135,8 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 5758671961391143110, guid: 352e26ce1697b432fb1b4986dce17aae, type: 3}
   _shootPoint: {fileID: 4671279272059840451}
   _shootDelay: 1
+  _abilities:
+  - {fileID: -6587426219406173903}
 --- !u!114 &6354061886262469206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4280,6 +4284,27 @@ MonoBehaviour:
   _attack: 0
   _animator: {fileID: 2100490505155571288}
   _takeDamageMonoBehaviour: {fileID: 4671279273187105075}
+--- !u!81 &5531269809792561902
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100490505148276100}
+  m_Enabled: 1
+--- !u!114 &-6587426219406173903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100490505148276100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1aecc69c594e458cab4e5da6d27db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clip: {fileID: 8300000, guid: 809aad58c200f4bba92c9f0ef7b482d1, type: 3}
 --- !u!1 &2100490505148276102
 GameObject:
   m_ObjectHideFlags: 0
