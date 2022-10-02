@@ -5,7 +5,7 @@ namespace Code.UI
 {
     public class MoneyController:MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _moneyText;
+        public TextMeshProUGUI MoneyText;
         private int _money;
         private const string MoneyKey = "Money";
 
@@ -22,7 +22,10 @@ namespace Code.UI
             ChangeText();
         }
 
-        private void ChangeText() => 
-            _moneyText.text = $"Money: {_money}G";
+        private void ChangeText()
+        {
+            if (MoneyText!=null)
+                MoneyText.text = $"{_money}";
+        }
     }
 }

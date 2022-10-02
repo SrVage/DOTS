@@ -16,7 +16,8 @@ namespace Code.Abilities
 
         public void Execute()
         {
-            _effectSource.Play(_clip, transform.position);
+            if (_effectSource!=null)
+                _effectSource.Play(_clip, transform.position);
         }
     }
 }

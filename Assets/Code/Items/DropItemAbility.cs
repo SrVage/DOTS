@@ -28,8 +28,8 @@ namespace Code.Items
                     Debug.Log(character+" "+true);
                     character.GetItem(Name);
                     _dstManager.DestroyEntity(_entity);
-                    if(GetComponent<PhotonView>().IsMine && PhotonNetwork.IsConnected)
-                        PhotonNetwork.Destroy(gameObject);
+                    //if(GetComponent<PhotonView>().IsMine && PhotonNetwork.IsConnected)
+                    Destroy(gameObject);
                 }
             }
         }

@@ -1,4 +1,5 @@
 using Code.Components.Interfaces;
+using Unity.Entities.CodeGeneratedJobForEach;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,9 +31,17 @@ namespace Code.UI
         private void ChangeVisible()
         {
             if (_canvas.alpha == 0)
+            {
                 _canvas.alpha = 1;
+                _canvas.interactable = true;
+                _canvas.blocksRaycasts = true;
+            }
             else
+            {
                 _canvas.alpha = 0;
+                _canvas.interactable = false;
+                _canvas.blocksRaycasts = false;
+            }
         }
     }
 }

@@ -21,8 +21,9 @@ namespace Code
         public void GetItem(string name)
         {
             if (_inventory==null)
-                _inventory = FindObjectOfType<Inventory>(); 
-            _inventory.CreateNewItem(name, this);
+                _inventory = FindObjectOfType<Inventory>();
+            if (_inventory!=null)
+                _inventory.CreateNewItem(name, this);
         }
 
         public void SetShield(float time)
